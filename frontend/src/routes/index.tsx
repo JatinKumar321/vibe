@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import { JSX } from "react";
 import React from "react";
+import ParentComponent from "@/pages/testing-proctoring/ParentComponent"; // Import ParentComponent
 
 // ✅ Role-Based Route Guard
 function ProtectedRoute({ role, children }: { role: "teacher" | "student"; children: JSX.Element }) {
@@ -22,8 +23,20 @@ export default function AppRoutes() {
             <Routes>
                 <Route path="/auth" element={<AuthPage />} />
 
+                {/* Route for Face Recognition Testing */}
+                <Route path="/testing/face-recognition" element={<ParentComponent />} />
+
                 {/* ✅ Register Teacher Routes */}
-                <Route path={teacherRoutes.path} element={teacherRoutes.element && React.isValidElement(teacherRoutes.element) ? <ProtectedRoute role="teacher">{teacherRoutes.element}</ProtectedRoute> : <Navigate to="/auth" />}>
+                <Route
+                    path={teacherRoutes.path}
+                    element={
+                        teacherRoutes.element && React.isValidElement(teacherRoutes.element) ? (
+                            <ProtectedRoute role="teacher">{teacherRoutes.element}</ProtectedRoute>
+                        ) : (
+                            <Navigate to="/auth" />
+                        )
+                    }
+                >
                     {teacherRoutes.children?.map((child, idx) => (
                         <Route
                             key={idx}
@@ -33,7 +46,6 @@ export default function AppRoutes() {
                         />
                     ))}
                 </Route>
-
 
                 <Route path="/" element={<Navigate to="/auth" />} />
             </Routes>
