@@ -9,7 +9,7 @@
 		"lint-staged": "^15.5.0"
 	},
 	"scripts": {
-		"prepare": "husky",
+		"prepare": "husky install",
 		"binaries": "pnpx ts-node scripts/preload-mongo-binary.ts",
 		"vibe": "pnpx ts-node cli/src/cli.ts"
 	},
