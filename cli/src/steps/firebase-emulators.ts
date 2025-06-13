@@ -2,9 +2,13 @@
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
-import { findProjectRoot } from "../findRoot.ts";
+import { findProjectRoot } from "../findRoot";
 
 const rootDir = findProjectRoot();
+if (!rootDir) {
+  console.error("❌ Please run this command from within the vibe project directory.");
+  process.exit(1);
+}
 const backendDir = path.join(rootDir, "backend");
 const statePath = path.join(rootDir, ".vibe.json");
 

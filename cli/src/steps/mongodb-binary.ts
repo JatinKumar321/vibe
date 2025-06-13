@@ -2,10 +2,14 @@
 import fs from "fs";
 import path from "path";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import { findProjectRoot } from "../findRoot.ts";
+import { findProjectRoot } from "../findRoot";
 
 
 const rootDir = findProjectRoot();
+if (!rootDir) {
+  console.error("❌ Please run this command from within the vibe project directory.");
+  process.exit(1);
+}
 const statePath = path.join(rootDir, ".vibe.json");
 
 // Step name constant

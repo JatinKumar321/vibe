@@ -3,10 +3,15 @@ import { select } from "@inquirer/prompts";
 import fs from "fs";
 import os from "os";
 import path from "path";
-import { findProjectRoot } from "../findRoot.ts";
+import { findProjectRoot } from "../findRoot";
 
+const projectRoot = findProjectRoot();
+if (!projectRoot) {
+  console.error("❌ Please run this command from within the vibe project directory.");
+  process.exit(1);
+}
 // Path to .vibe.json state file
-const statePath = path.resolve(findProjectRoot(), ".vibe.json");
+const statePath = path.resolve(projectRoot, ".vibe.json");
 
 // Read existing state
 function readState(): Record<string, any> {

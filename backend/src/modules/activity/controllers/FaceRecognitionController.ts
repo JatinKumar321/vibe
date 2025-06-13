@@ -110,12 +110,6 @@ export class FaceRecognitionController {
       return {
         message: 'Face image uploaded successfully',
         path: result.path,
-        details: {
-          personName,
-          filename: file.originalname,
-          filesize: file.buffer.length,
-          mimetype: file.mimetype,
-        },
       };
     } catch (error) {
       console.error('Error in uploadFace:', error);

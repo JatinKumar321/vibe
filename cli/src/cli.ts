@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import { runStart } from "./commands/start.ts";
-import { runTest } from "./commands/test.ts";
-import { runHelp } from "./commands/help.ts";
-import { runSetup } from "./commands/setup.ts";
+import { runStart } from "./commands/start";
+import { runTest } from "./commands/test";
+import { runHelp } from "./commands/help";
+import { runSetup } from "./commands/setup";
 
 const program = new Command();
 

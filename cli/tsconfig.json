@@ -2,7 +2,19 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "build"
+    "outDir": "build",
+    "lib": [
+      "ES2017",
+      "DOM"
+    ],
+    "esModuleInterop": true,
+    "module": "esnext",
+    "target": "es2017",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": false,
+    "noEmit": false,
+    "noImplicitAny": false
   },
   "include": [
     "src/**/*.ts",

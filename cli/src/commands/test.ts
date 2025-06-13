@@ -1,7 +1,7 @@
 import { spawnSync } from "child_process";
 import os from "os";
 import path from "path";
-import { findProjectRoot } from "../findRoot.ts";
+import { findProjectRoot } from "../findRoot";
 
 function runTestProcess(name: string, cwd: string): boolean {
   console.log(`🧪 Running ${name} tests...`);

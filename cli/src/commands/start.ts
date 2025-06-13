@@ -1,10 +1,10 @@
 import { spawn } from "child_process";
 import os from "os";
 import path from "path";
-import { findProjectRoot } from "../findRoot.ts";
+import { findProjectRoot } from "../findRoot";
 
 function runProcess(name: string, cwd: string, script: string = "dev") {
-  return new Promise((resolve, reject) => {
+  return new Promise<boolean>((resolve, reject) => {
     console.log(`⏳ Starting ${name} in ${cwd} with script '${script}'...`);
 
     const isWindows = os.platform() === "win32";
@@ -27,7 +27,7 @@ function runProcess(name: string, cwd: string, script: string = "dev") {
 }
 
 function runFirebaseEmulator(name: string, cwd: string, script: string = "dev") {
-  return new Promise((resolve, reject) => {
+  return new Promise<boolean>((resolve, reject) => {
     console.log(`⏳ Starting ${name} in ${cwd} with script '${script}'...`);
 
     const isWindows = os.platform() === "win32";
@@ -89,7 +89,7 @@ export async function runStart() {
   }
 
   try {
-    const processes = [];
+    const processes: Promise<boolean>[] = [];
 
     if (startBackend) {
       processes.push(runProcess("Backend", backendDir, "dev"));

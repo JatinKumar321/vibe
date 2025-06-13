@@ -2,9 +2,14 @@
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
-import { findProjectRoot } from "../findRoot.ts";
+import { findProjectRoot } from "../findRoot";
 
-const stateFile = path.resolve(findProjectRoot(), ".vibe.json");
+const projectRoot = findProjectRoot();
+if (!projectRoot) {
+  console.error("❌ Please run this command from within the vibe project directory.");
+  process.exit(1);
+}
+const stateFile = path.resolve(projectRoot, ".vibe.json");
 
 // Constants
 const STEP_NAME = "Firebase Login";

@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 import fs from "fs";
 import path from "path";
-import { findProjectRoot } from "../findRoot.ts";
+import { findProjectRoot } from "../findRoot";
 import password from '@inquirer/password';
 
 const rootDir = findProjectRoot();
+if (!rootDir) {
+  console.error("❌ Please run this command from within the vibe project directory.");
+  process.exit(1);
+}
 const backendDir = path.join(rootDir, "backend");
 const statePath = path.join(rootDir, ".vibe.json");
 const envPath = path.join(backendDir, ".env");
@@ -60,7 +64,7 @@ console.log(`
 const mongoUri = await getMongoUri();
 
 // Write to .env file
-fs.writeFileSync(envPath, `DB_URL="${mongoUri}"\n`);
+fs.writeFileSync(envPath, `DB_URL="${mongoUri}"\nFIREBASE_AUTH_EMULATOR_HOST=127.0.0.1:9099\nFIREBASE_EMULATOR_HOST=127.0.0.1:4000\nGCLOUD_PROJECT=demo-test`);
 console.log(`✅ Wrote MongoDB URI to ${envPath}`);
 
 // Save step complete
